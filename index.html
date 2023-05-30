@@ -7,6 +7,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Lab 9</title>
 
+  <script src="https://cdn.trackjs.com/agent/v3/latest/t.js"></script>
+  <script>
+    window.TrackJS && TrackJS.install({ 
+      token: "baad87748c934613af700e1d382077e1"
+      // for more configuration options, see https://docs.trackjs.com
+    });
+    TrackJS.track('Testing TrackJS!');
+  </script>
+
   <style>
     button {
       margin: 3px;
@@ -85,17 +94,7 @@
       <button>Console Trace</button>
       <button>Trigger a Global Error</button><!--  14 -->
     </section>
-  </main>
-
-  <script src="https://cdn.trackjs.com/agent/v3/latest/t.js"></script>
-  <script>
-    window.TrackJS && TrackJS.install({ 
-      token: "baad87748c934613af700e1d382077e1"
-      // for more configuration options, see https://docs.trackjs.com
-    });
-    TrackJS.track('Testing TrackJS!');
-  </script>
-                          
+  </main>                          
 
   <script>
     let form = document.querySelector('form');
