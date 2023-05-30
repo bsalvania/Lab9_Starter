@@ -69,9 +69,9 @@
     </form>
 
     <section id="error-btns">
-      <button>Console Log</button>
-      <button>Console Error</button>
-      <button>Console Count</button>
+      <button>Console Log</button> 
+      <button>Console Error</button> 
+      <button>Console Count</button> 
       <button>Console Warn</button>
       <button>Console Assert</button>
       <button>Console Clear</button>
@@ -83,9 +83,19 @@
       <button>Start Timer</button>
       <button>End Timer</button>
       <button>Console Trace</button>
-      <button>Trigger a Global Error</button>
+      <button>Trigger a Global Error</button><!--  14 -->
     </section>
   </main>
+
+  <script src="https://cdn.trackjs.com/agent/v3/latest/t.js"></script>
+  <script>
+    window.TrackJS && TrackJS.install({ 
+      token: "baad87748c934613af700e1d382077e1"
+      // for more configuration options, see https://docs.trackjs.com
+    });
+    TrackJS.track('Testing TrackJS!');
+  </script>
+                          
 
   <script>
     let form = document.querySelector('form');
@@ -102,6 +112,122 @@
 
     // Start your code here
     // You may move this JS to another file if you wish
+
+    // For Console Log
+    errorBtns[0].addEventListener('click', e => {
+      console.log("Button pressed - Console Log");
+    })
+
+    // For Console Error
+    errorBtns[1].addEventListener('click', e => {
+      console.error("Button pressed - Console Error");
+    })
+
+    // For Console Count
+    let clickCount = 0;
+    errorBtns[2].addEventListener('click', e => {
+      console.log(`Clicking at ${++clickCount}`);
+    })
+
+    // For Console Warn
+    errorBtns[3].addEventListener('click', e => {
+      console.warn("Button pressed - Console Warn");
+    })
+
+    // For Console Assert
+    errorBtns[4].addEventListener('click', e => {
+      const x = 5;
+      const y = 3;
+      const reason = 'x is expected to be less than y';
+      console.assert(x < y, {x, y, reason});
+    })
+
+    // For Console Clear
+    errorBtns[5].addEventListener('click', e => {
+      console.clear();
+      clickCount = 0
+    })
+
+    // For Console Dir
+    errorBtns[6].addEventListener('click', e => {
+      console.dir(document.head);
+    })
+
+    // For Console dirxml
+    errorBtns[7].addEventListener('click', e => {
+      console.dirxml(document.head);
+    })
+
+    // For Console Group Start
+    errorBtns[8].addEventListener('click', e => {
+      console.group("Console group");
+    })
+
+    // For Console Group End
+    errorBtns[9].addEventListener('click', e => {
+      console.groupEnd();
+    })
+
+    // For Console Table
+    let tempTable = [{game: "Fortnite", company: "Epic Games"},
+                     {game: "Tears of The Kingdom", company: "Nintendo"},
+                     {game: "Valorant", company: "Riot Games"}];
+    errorBtns[10].addEventListener('click', e => {
+      console.table(tempTable);
+    })
+
+    // For Start Timer
+    errorBtns[11].addEventListener('click', e => {
+      console.time();
+    })
+
+    // For End Timer
+    errorBtns[12].addEventListener('click', e => {
+      console.timeEnd();
+    })
+
+    // For Console Trace
+    errorBtns[13].addEventListener('click', e => {
+      const first = () => { second(); };
+      const second = () => { third(); };
+      const third = () => { fourth(); };
+      const fourth = () => { console.trace(); };
+      first();
+    })
+
+    // For Trigger a Global Error
+    errorBtns[14].addEventListener('click', e => {
+      console.log("you just triggered an error :(");
+      let globalError = The_world;
+      console.log(globalError);
+    })
+
+
+    // For step 4, creating a custom error
+    class ValidationError extends Error {
+    constructor(message) {
+      super(message); 
+      this.name = "ValidationError";
+      }
+    }
+    
+
+    // For step 3 (trying Try/Catch)
+    let json = '{ "title": "Fortnite" }'; // incomplete data
+    try {
+      let game = JSON.parse(json);
+
+      if (!game.company) {
+        throw new ValidationError("No field: company"); 
+      }
+    } catch (err) {
+      if (err instanceof ValidationError) {
+        console.error( "JSON Error: " + err.message ); // JSON Error: Incomplete data: no name
+      }
+    } finally {
+        console.log("An error has occurred.");
+    }
+
   </script>
 </body>
 
